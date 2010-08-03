@@ -1,0 +1,7 @@
+content   fftcpcrypt                 chrome/content/
+skin      fftcpcrypt   classic/1.0   chrome/skin/
+locale    fftcpcrypt   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://fftcpcrypt/content/ff-overlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://fftcpcrypt/skin/overlay.css

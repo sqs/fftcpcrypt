@@ -1,0 +1,8 @@
+<!ENTITY fftcpcrypt.label "Your localized menuitem">
+<!ENTITY fftcpcryptContext.label "Your Menuitem">
+<!ENTITY fftcpcryptContext.accesskey "Y">
+<!ENTITY fftcpcryptToolbarButton.label "Your Toolbar Button">
+<!ENTITY fftcpcryptToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY fftcpcryptSidebar.label "Your Sidebar">
+<!ENTITY fftcpcryptToolbar.name  "example">
+<!ENTITY fftcpcryptToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &fftcpcryptToolbar.name;">
