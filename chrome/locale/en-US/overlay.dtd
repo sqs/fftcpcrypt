@@ -1,2 +1,2 @@
-<!ENTITY fftcpcryptToolbarButton.label "Your Toolbar Button">
-<!ENTITY fftcpcryptToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY fftcpcryptToolbarButton.label "tcpcrypt">
+<!ENTITY fftcpcryptToolbarButton.tooltip "View Tcpcrypt connection info">
