@@ -21,7 +21,7 @@ GECKO_LDFLAGS =  -L $(GECKO_SDK_PATH)/lib \
                  -lnspr4         \
                  -lplds4      
 
-SRC = tcTcpcryptSocketProvider.cpp tcHttptHandler.cpp
+SRC = tcTcpcryptSocketProvider.cpp tcHttptHandler.cpp tcTcpcryptModule.cpp
 
 OBJ = $(SRC:.cpp=.so)
 

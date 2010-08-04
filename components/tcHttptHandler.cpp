@@ -11,10 +11,14 @@
 #include "nsIServiceManager.h"
 #include "nsIGenericFactory.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 NS_IMPL_ISUPPORTS3(tcHttptHandler,
                    nsIHttpProtocolHandler,
                    nsIProxiedProtocolHandler,
                    nsIProtocolHandler)
+
 
 tcHttptHandler::tcHttptHandler()
 {
@@ -28,6 +32,9 @@ tcHttptHandler::Init()
 {
     nsresult rv;
     nsIServiceManager *sm;
+
+    printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@11\n");
+    exit(1);
 
     rv = NS_GetServiceManager(&sm);
     if (NS_FAILED(rv)) return rv;
@@ -80,17 +87,3 @@ tcHttptHandler::AllowPort(PRInt32 aPort, const char *aScheme, PRBool *_retval)
 {
     return httpHandler->AllowPort(aPort, aScheme, _retval);
 }
-
-NS_GENERIC_FACTORY_CONSTRUCTOR(tcHttptHandler);
-
-static const nsModuleComponentInfo components[] = 
-{
-  {
-    "tcHttptHandlerConstructor",
-    TC_HTTPTHANDLER_CID,
-    "@mozilla.org/network/protocol;1?name=httpt",
-    tcHttptHandlerConstructor
-  }
-};
-
-NS_IMPL_NSGETMODULE("tcHttptHandlerModule", components);

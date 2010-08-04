@@ -52,16 +52,5 @@ tcTcpcryptSocketProvider::AddToSocket(PRInt32 aFamily,
     return NS_ERROR_UNEXPECTED;
 }
 
-NS_GENERIC_FACTORY_CONSTRUCTOR(tcTcpcryptSocketProvider);
 
-static const nsModuleComponentInfo components[] = 
-{
-  {
-    "tcTcpcryptSocketProvider",
-    TC_TCPCRYPTSOCKETPROVIDER_CID,
-    "@mozilla.org/network/socket;2?name=tcpcrypt",
-    tcTcpcryptSocketProviderConstructor
-  }
-};
 
-NS_IMPL_NSGETMODULE("tcTcpcryptSocketProviderModule", components);

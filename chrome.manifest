@@ -2,10 +2,13 @@ content   fftcpcrypt                 chrome/content/
 skin      fftcpcrypt   classic/1.0   chrome/skin/
 locale    fftcpcrypt   en-US         chrome/locale/en-US/
 
-component {ecc32972-1cb3-484e-bdeb-907526dbf4eb} components/tcTcpcryptSocketProvider.so
-contract @mozilla.org/network/socket;2?name=tcpcrypt {ecc32972-1cb3-484e-bdeb-907526dbf4eb}
+# component {ecc32972-1cb3-484e-bdeb-907526dbf4eb} components/tcTcpcryptSocketProvider.so
+# contract @mozilla.org/network/socket;2?name=tcpcrypt {ecc32972-1cb3-484e-bdeb-907526dbf4eb}
 
-component {45174059-8f44-45c6-9826-3f7e367cef2f} components/tcHttptHandler.so
+# component {45174059-8f44-45c6-9826-3f7e367cef2f} components/tcHttptHandler.dll
+# contract @mozilla.org/network/protocol;1?name=httpt {45174059-8f44-45c6-9826-3f7e367cef2f}
+
+component {45174059-8f44-45c6-9826-3f7e367cef2f} components/tcHttptHandler.js
 contract @mozilla.org/network/protocol;1?name=httpt {45174059-8f44-45c6-9826-3f7e367cef2f}
 
 overlay   chrome://browser/content/browser.xul   chrome://fftcpcrypt/content/ff-overlay.xul

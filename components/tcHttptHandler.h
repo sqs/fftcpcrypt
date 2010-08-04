@@ -16,11 +16,14 @@ public:
     // we basically just want to override GetScheme...
     // all other methods should be forwarded to the nsHttpHandler instance.
     
-    NS_DECL_ISUPPORTS
-    NS_DECL_NSIPROTOCOLHANDLER
-    // NS_FORWARD_NSIPROTOCOLHANDLER        (httpHandler->)
-    NS_FORWARD_NSIPROXIEDPROTOCOLHANDLER (httpHandler->)
-    NS_FORWARD_NSIHTTPPROTOCOLHANDLER    (httpHandler->)
+  NS_DECL_ISUPPORTS;
+  NS_DECL_NSIPROTOCOLHANDLER;
+  //      NS_DECL_NSIHTTPPROTOCOLHANDLER;
+
+      //NS_FORWARD_SAFE_NSIPROTOCOLHANDLER        (httpHandler);
+
+    NS_FORWARD_SAFE_NSIPROXIEDPROTOCOLHANDLER (httpHandler);
+      NS_FORWARD_SAFE_NSIHTTPPROTOCOLHANDLER    (httpHandler)
 
 
     tcHttptHandler();
