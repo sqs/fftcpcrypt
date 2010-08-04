@@ -17,7 +17,7 @@ tcHttptHandler.prototype = {
   defaultPort: 80,
   protocolFlags: Ci.nsIProtocolHandler.URI_NOAUTH,
 
-  /*nsIHttpProtocolHandler*/ 
+  /* nsIHttpProtocolHandler */ 
   savedHttpHandler: 
     Components.classesByID["{4f47e42e-4d23-4dd3-bfda-eb29255e9ea3}"]. 
     getService(Components.interfaces.nsIHttpProtocolHandler), 
