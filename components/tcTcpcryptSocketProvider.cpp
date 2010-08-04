@@ -5,6 +5,7 @@
 #include "nsMemory.h"
 #include "nsIClassInfoImpl.h"
 #include <prio.h>
+#include "nspr/private/pprio.h"
 #include <stdio.h>
 
 tcTcpcryptSocketProvider::tcTcpcryptSocketProvider()
@@ -14,7 +15,7 @@ tcTcpcryptSocketProvider::tcTcpcryptSocketProvider()
 
 tcTcpcryptSocketProvider::~tcTcpcryptSocketProvider()
 {
-    printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+
 }
 
 NS_IMPL_CLASSINFO(tcTcpcryptSocketProvider, 
@@ -32,13 +33,22 @@ tcTcpcryptSocketProvider::NewSocket(PRInt32 aFamily,
                                     const char *aProxyHost, 
                                     PRInt32 aProxyPort,
                                     PRUint32 aFlags,
-                                    PRFileDesc **aFileDesc, 
+                                    PRFileDesc **fd, 
                                     nsISupports **aSecurityInfo)
 {
     nsresult rv;
-    printf("@@@@@@@@@@@@@@@@@@@@@@@(((((((((((((((((())))))))))))))))))\n");
-    *aFileDesc = PR_OpenTCPSocket(aFamily);
-    rv = *aFileDesc ? NS_OK : NS_ERROR_OUT_OF_MEMORY;
+    int osfd;
+    *fd = PR_OpenTCPSocket(aFamily);
+    rv = *fd ? NS_OK : NS_ERROR_OUT_OF_MEMORY;
+
+    if (!NS_FAILED(rv)) {
+        printf("---------------------------\n");
+        printf("NewSocket: %p\n", *fd);
+        osfd = PR_FileDesc2NativeHandle(*fd);
+        printf("osfd = %d\n", osfd);
+        printf("---------------------------\n");
+    }
+
     return rv;
 }
 
