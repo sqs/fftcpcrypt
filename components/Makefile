@@ -6,6 +6,9 @@ CPPFLAGS +=     -fno-rtti              \
 		-fmessage-length=0     \
                 -shared  
 
+INCLUDES=-I../../tcpcrypt/code/user -I../../tcpcrypt/code/user/tcpcrypt
+LIBS=-L../../tcpcrypt/code/user/lib -ltcpcrypt
+
 #GECKO_SDK_PATH = /home/sqs/src/xulrunner-sdk/
 GECKO_SDK_PATH = /home/sqs/src/mozilla-central/objdir-ff-debug/dist/sdk
 
@@ -32,7 +35,7 @@ SRC = tcTcpcryptSocketProvider.cpp tcTcpcryptModule.cpp
 OBJ = tcTcpcryptSocketProvider.so
 
 $(OBJ): $(SRC)
-	$(CXX) -Wall -Os -o $@ $(CPPFLAGS) $(CFLAGS) $(GECKO_CONFIG_INCLUDE) $(GECKO_DEFINES) $(GECKO_INCLUDES) $(SRC) $(GECKO_LDFLAGS) 
+	$(CXX) -Wall -Os -o $@ $(CPPFLAGS) $(CFLAGS) $(GECKO_CONFIG_INCLUDE) $(GECKO_DEFINES) $(GECKO_INCLUDES) $(INCLUDES) $(SRC) $(GECKO_LDFLAGS) $(LIBS)
 	chmod +x $@
 #	strip $@
 
