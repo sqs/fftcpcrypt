@@ -11,3 +11,5 @@ contract @mozilla.org/network/protocol;1?name=httpt {45174059-8f44-45c6-9826-3f7
 
 overlay   chrome://browser/content/browser.xul   chrome://fftcpcrypt/content/ff-overlay.xul
 style chrome://global/content/customizeToolbar.xul chrome://fftcpcrypt/skin/overlay.css
+
+resource fftcpcrypt    modules/
