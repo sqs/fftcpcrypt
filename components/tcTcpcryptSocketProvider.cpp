@@ -6,7 +6,16 @@
 #include "nsIClassInfoImpl.h"
 #include <prio.h>
 #include "nspr/private/pprio.h"
+
+extern "C" {
+#include "lib/tcpcrypt.h"
+#include "tcpcrypt/tcpcrypt.h"
+#include "tcpcrypt/tcpcrypt_ctl.h"
+}
+
 #include <stdio.h>
+#include <cstring>
+#include <errno.h>
 
 tcTcpcryptSocketProvider::tcTcpcryptSocketProvider()
 {
@@ -46,6 +55,28 @@ tcTcpcryptSocketProvider::NewSocket(PRInt32 aFamily,
         printf("NewSocket: %p\n", *fd);
         osfd = PR_FileDesc2NativeHandle(*fd);
         printf("osfd = %d\n", osfd);
+
+        unsigned char buf[1024];
+        int tc_enable;
+        unsigned int len;
+
+        len = sizeof(buf);
+        if (tcpcrypt_getsockopt(osfd, IPPROTO_TCP, TCP_CRYPT_ENABLE,
+                                buf, &len) == -1) {
+            printf("errno = %d\n", errno);
+            if (errno == ENOENT) {
+                tc_enable = 0;
+            } else {
+                printf("getsockopt error for TCP_CRYPT_ENABLE: %s (%d)\n",
+                       strerror(errno), errno);
+                exit(1);
+            }
+        } else {
+            tc_enable = !!buf[0];
+        }
+
+        printf("TCP_CRYPT_ENABLE = %s\n", tc_enable ? "YES" : "NO");
+        //        printf("TCP_CRYPT_SESSID = %s\n");
         printf("---------------------------\n");
     }
 
