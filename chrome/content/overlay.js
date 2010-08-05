@@ -5,13 +5,6 @@ var fftcpcrypt = {
     this.strings = document.getElementById("fftcpcrypt-strings");
   },
 
-  onMenuItemCommand: function(e) {
-    var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                  .getService(Components.interfaces.nsIPromptService);
-    promptService.alert(window, this.strings.getString("helloMessageTitle"),
-                                this.strings.getString("helloMessage"));
-  },
-
   onToolbarButtonCommand: function(e) {
     // just reuse the function above.  you can change this, obviously!
     fftcpcrypt.onMenuItemCommand(e);
