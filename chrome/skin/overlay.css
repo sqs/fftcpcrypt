@@ -1,22 +1,22 @@
 /* This is just an example.  You shouldn't do this. */
-#fftcpcrypt-hello
+#tcpcrypt-hello
 {
   color: red ! important;
 }
-#fftcpcrypt-toolbar-button
+#tcpcrypt-toolbar-button
 {
   list-style-image: url("chrome://fftcpcrypt/skin/toolbar-button.png");
   -moz-image-region: rect(0px 24px 24px 0px);
 }
-#fftcpcrypt-toolbar-button:hover
+#tcpcrypt-toolbar-button:hover
 {
   -moz-image-region: rect(24px 24px 48px  0px);
 }
-[iconsize="small"] #fftcpcrypt-toolbar-button
+[iconsize="small"] #tcpcrypt-toolbar-button
 {
   -moz-image-region: rect( 0px 40px 16px 24px);
 }
-[iconsize="small"] #fftcpcrypt-toolbar-button:hover
+[iconsize="small"] #tcpcrypt-toolbar-button:hover
 {
   -moz-image-region: rect(24px 40px 40px 24px);
 }

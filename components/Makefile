@@ -30,9 +30,9 @@ GECKO_LDFLAGS =  -L $(GECKO_SDK_PATH)/lib \
                  -lnspr4         \
                  -lplds4 -lplc4 -ldl -Wl,-Bsymbolic
 
-SRC = tcTcpcryptSocketProvider.cpp tcTcpcryptModule.cpp
+SRC = tcTcpcryptSocketProvider.cpp tcTcpcryptSocketInfo.cpp tcTcpcryptModule.cpp
 
-OBJ = tcTcpcryptSocketProvider.so
+OBJ = tcTcpcryptModule.so
 
 $(OBJ): $(SRC)
 	$(CXX) -Wall -Os -o $@ $(CPPFLAGS) $(CFLAGS) $(GECKO_CONFIG_INCLUDE) $(GECKO_DEFINES) $(GECKO_INCLUDES) $(INCLUDES) $(SRC) $(GECKO_LDFLAGS) $(LIBS)

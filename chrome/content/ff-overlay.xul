@@ -2,19 +2,34 @@
 <?xml-stylesheet href="chrome://fftcpcrypt/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://fftcpcrypt/locale/overlay.dtd">
 <overlay id="fftcpcrypt-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="overlay.js"/>
-  <script src="ff-overlay.js"/>
+  <script src="fftcpcrypt.js"/>
 
   <stringbundleset id="stringbundleset">
     <stringbundle id="fftcpcrypt-strings" src="chrome://fftcpcrypt/locale/overlay.properties"/>
   </stringbundleset>
 
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="tcpcrypt-secinfo-state" state="disabled"/>
+  </broadcasterset>
+
   <toolbarpalette id="BrowserToolbarPalette">
-  <toolbarbutton id="fftcpcrypt-toolbar-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
-    label="&fftcpcryptToolbarButton.label;" tooltiptext="&fftcpcryptToolbarButton.tooltip;"
-    oncommand="fftcpcrypt.onToolbarButtonCommand()"/>
+    <toolbarbutton id="tcpcrypt-toolbar-button" 
+                   class="toolbarbutton-1 chromeclass-toolbar-additional"
+                   observes="tcpcrypt-secinfo-state"
+                   label="&fftcpcryptToolbarButton.label;"
+                   tooltiptext="&fftcpcryptToolbarButton.tooltip;"
+                   oncommand="fftcpcrypt.onToolbarButtonCommand()"/>
   </toolbarpalette>
 
 
+  <popupset id="mainPopupSet">
+    <panel id="tcpcrypt-secinfo-popup"
+           observes="tcpcrypt-secinfo-state"
+           onpopupshowing="fftcpcrypt.onPopupShowing(event);">
+      <vbox id="tcpcrypt-secinfo-popup-1">
+        <description id="tcpcrypt-secinfo-sessid"></description>
+      </vbox>
+    </panel>
+  </popupset>
 
 </overlay>
