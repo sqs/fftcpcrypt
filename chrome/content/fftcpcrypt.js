@@ -33,12 +33,9 @@ FFTcpcrypt.prototype = {
       var val = [];
       for (sessid in sessions) {
           var urls = sessions[sessid];
-          var urlList = [];
-          for (url in urls)
-              urlList.push(url);
-          val.push(sessid + ": " + urls);
+          val.push(sessid + ": " + urls.join("   "));
       }
-      this._curTabTcpcryptSessions.value = val.join("\n");
+      this._curTabTcpcryptSessions.textContent = val.join("\n");
       this._popup.openPopup(this._button, "after_end", 25, -10);
   },
 

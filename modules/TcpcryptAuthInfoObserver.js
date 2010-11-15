@@ -1,17 +1,5 @@
 const EXPORTED_SYMBOLS = ['TcpcryptAuthInfoObserver'];
-
-
-function setTimeout(func, delay)
-{
-var timer =
-Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-var callback = { that: this, notify: function () {
-func.call(this.that); } };
-timer.initWithCallback(callback, delay,
-Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-return timer;
-}
-
+Components.utils.import("resource://fftcpcrypt/libtcpcrypt.js");
 
 // reference to the interface defined in nsIHttpActivityObserver.idl
 const nsIHttpActivityObserver = Components.interfaces.nsIHttpActivityObserver;
@@ -26,36 +14,25 @@ function TcpcryptAuthInfoObserver(fftcpcrypt) {
                             .getService(Components.interfaces.nsIHttpActivityDistributor);
   activityDistributor.addObserver(this);
   this._fftcpcrypt = fftcpcrypt;
-
-  this._log("TcpcryptAuthInfoObserver() \n\n");
 }
 
 TcpcryptAuthInfoObserver.prototype = {
-  _log: function(s) {
-    dump("-- TcpcryptAuthInfoObserver: " + s + "\n");
-  },
-
   observeActivity: function(channel, aActivityType, aActivitySubtype,
                             aTimestamp, aExtraSizeData, aExtraStringData)
   {
-      if (true || aActivitySubtype == nsIHttpActivityObserver.ACTIVITY_SUBTYPE_RESPONSE_COMPLETE) {
-        //setTimeout(function(){
-        channel.QueryInterface(Components.interfaces.nsIChannel);
-        dump(">>>> " + acType(aActivityType) + " : " + 
-             acSubType(aActivitySubtype) + "\n:::: " +
-             channel.URI.spec + "\n");
-        if (channel.securityInfo) {
-            let tcI = Components.interfaces.tcITransportSessionInfo;
-            let tc  = channel.securityInfo.QueryInterface(tcI);
-            dump("--------------------------------------------------\n"+
-                 channel.URI.hostPort + ": " + 
-                 "TCP_CRYPT_SESSID = " + tc.sessionID + "\n" +
-                 "--------------------------------------------------\n");
-            this._fftcpcrypt.onTcpcryptSessionEstablished(channel.URI, tc.sessionID);
-            //},1);
-        } else {
-            dump("securityInfo is undefined\n");
-        }
+      if (aActivitySubtype == 
+            nsIHttpActivityObserver.ACTIVITY_SUBTYPE_RESPONSE_COMPLETE) {
+          channel.QueryInterface(Components.interfaces.nsIChannel);
+          dump(channel + "\n\n\n\n");
+          let uri = channel.URI;
+          let port = uri.port;
+          if (port == -1)
+              port = 80;
+          let tcsessid = tcpcrypt_getsessid(uri.host, port);
+          if (tcsessid) {
+              dump(uri.host + ":" + port + " : TCP_CRYPT_SESSID = " + tcsessid + "\n");
+              this._fftcpcrypt.onTcpcryptSessionEstablished(uri, tcsessid);
+          }
     }
   } 
 };
