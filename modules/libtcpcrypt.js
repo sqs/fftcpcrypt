@@ -21,6 +21,8 @@ tcpcrypt = function() {
 tcpcrypt.prototype = {
     getsessid: function (remoteHost, remotePort) {
         let remoteIP = this._resolve_host(remoteHost);
+        if (!remoteIP)
+            return null;
         let sessidCharPtr = this._tcpcrypt_getsessid(remoteIP, remotePort, "", 0);
         if (sessidCharPtr.isNull())
             return null;
@@ -31,9 +33,14 @@ tcpcrypt.prototype = {
     _resolve_host: function (host) {
         let dnsService = Components.classes["@mozilla.org/network/dns-service;1"]
                  .createInstance(Components.interfaces.nsIDNSService);
-        let dnsRecord = dnsService.resolve(host, 0);
-        let ipString = dnsRecord.getNextAddrAsString();
-        return ipString;
+        try {
+            let dnsRecord = dnsService.resolve(host, 0);
+            let ipString = dnsRecord.getNextAddrAsString();
+            return ipString;
+        } catch (err) {
+            // dump("couldn't resolve " + host + ": " + err.toString() + "\n");
+            return null;
+        }
     }
 }
 
